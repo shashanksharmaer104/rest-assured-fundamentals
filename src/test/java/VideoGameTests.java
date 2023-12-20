@@ -70,4 +70,13 @@ public class VideoGameTests extends VideoGameConfig {
                 .put("/videogame/3")
         .then();
     }
+
+    @Test
+    public void deleteGame() {
+        given()
+                .header("Accept", "text/plain")
+        .when()
+                .delete("/videogame/2")
+        .then();
+    }
 }
