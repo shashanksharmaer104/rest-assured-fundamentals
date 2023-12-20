@@ -6,6 +6,8 @@ import static io.restassured.RestAssured.given;
 
 public class VideoGameTests extends VideoGameConfig {
 
+    //Test Swagger URL = https://www.videogamedb.uk/swagger-ui/index.html#/api-video-games-controller-v-2/
+
     String gameJSONBody = "{\n" +
             "  \"category\": \"Platform\",\n" +
             "  \"name\": \"God of war 4\",\n" +
@@ -77,6 +79,15 @@ public class VideoGameTests extends VideoGameConfig {
                 .header("Accept", "text/plain")
         .when()
                 .delete("/videogame/2")
+        .then();
+    }
+
+    @Test
+    public void getSingleGame() {
+        given()
+                .pathParams("videoGameId", 1)
+        .when()
+                .get(VideoGameEndpoints.SINGLE_VIDEO_GAME)
         .then();
     }
 }
