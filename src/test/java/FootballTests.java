@@ -76,4 +76,15 @@ public class FootballTests extends FootballConfig {
 
         System.out.println(response.asString());
     }
+
+    @Test
+    public void extractHeaders() {
+        Response response =
+                get("/teams/57")
+                .then()
+                        .extract().response();
+
+        System.out.println("My type: " + response.getContentType());
+        System.out.println("My header: " + response.getHeader("X-Authenticated-Client"));
+    }
 }
