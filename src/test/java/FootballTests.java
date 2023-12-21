@@ -2,6 +2,7 @@ import config.FootballConfig;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class FootballTests extends FootballConfig {
 
@@ -31,5 +32,26 @@ public class FootballTests extends FootballConfig {
         .when()
                 .get("/areas")
         .then();
+    }
+
+    @Test
+    public void getDateFounded() {
+        given()
+        .when()
+                .pathParams("id", 57)
+                .get("/teams/{id}")
+        .then()
+                .body("founded", equalTo(1886));
+    }
+
+    @Test
+    public void getFirstTeamName() {
+        given()
+        .when()
+                .pathParams("yearId", "2021")
+                .get("/competitions/{yearId}/teams")
+        .then()
+                .body("teams.name[1]", equalTo("Arsenal FC"));
+
     }
 }
