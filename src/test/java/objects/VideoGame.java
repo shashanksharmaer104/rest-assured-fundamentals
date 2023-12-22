@@ -7,11 +7,20 @@ import lombok.Setter;
 @Getter
 public class VideoGame {
 
+    private Integer id;
     private String category;
     private String name;
     private String rating;
     private String releaseDate;
     private Integer reviewScore;
+
+    /**
+     *
+     * Default constructor
+     */
+    public VideoGame() {
+
+    }
 
     /**
      *
