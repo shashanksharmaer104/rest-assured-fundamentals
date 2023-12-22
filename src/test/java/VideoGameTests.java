@@ -7,7 +7,9 @@ import io.restassured.response.Response;
 import objects.VideoGame;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.lessThan;
 
 public class VideoGameTests extends VideoGameConfig {
 
@@ -145,5 +147,18 @@ public class VideoGameTests extends VideoGameConfig {
         System.out.println(response.asString());
 
         System.out.printf("Name: %s%n", videoGame.getName());
+    }
+
+    @Test
+    public void checkResponseTime() {
+        long responseTime = get(VideoGameEndpoints.ALL_VIDEO_GAMES).time();
+
+        System.out.println("Response time in MS: " + responseTime);
+    }
+
+    @Test
+    public void assertResponseTime() {
+        get(VideoGameEndpoints.ALL_VIDEO_GAMES).then()
+                .time(lessThan(1500L));
     }
 }
