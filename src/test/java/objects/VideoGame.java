@@ -1,5 +1,10 @@
 package objects;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class VideoGame {
 
     private String category;
@@ -22,46 +27,6 @@ public class VideoGame {
         this.name = name;
         this.rating = rating;
         this.releaseDate = releaseDate;
-        this.reviewScore = reviewScore;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public Integer getReviewScore() {
-        return reviewScore;
-    }
-
-    public void setReviewScore(Integer reviewScore) {
         this.reviewScore = reviewScore;
     }
 
