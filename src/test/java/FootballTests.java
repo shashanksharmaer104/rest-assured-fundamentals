@@ -3,6 +3,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -86,5 +88,29 @@ public class FootballTests extends FootballConfig {
 
         System.out.println("My type: " + response.getContentType());
         System.out.println("My header: " + response.getHeader("X-Authenticated-Client"));
+    }
+
+    @Test
+    public void extractFirstTeamName() {
+        String teamName = get("/competitions/2021/teams").jsonPath().getString("teams.name[0]");
+
+        System.out.println(teamName);
+    }
+
+    @Test
+    public void extractAllTeamName() {
+        Response response =
+                given()
+                .when()
+                        .get("/competitions/2021/teams")
+                .then()
+                        .extract().response();
+
+        List<String> teamNames = response.path("teams.name");
+
+        System.out.println("============================================");
+        for (String teamName : teamNames) {
+            System.out.println(teamName);
+        }
     }
 }

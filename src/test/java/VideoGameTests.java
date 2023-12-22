@@ -1,5 +1,6 @@
 import config.VideoGameConfig;
 import config.VideoGameEndpoints;
+import objects.VideoGame;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -88,6 +89,17 @@ public class VideoGameTests extends VideoGameConfig {
                 .pathParams("videoGameId", 1)
         .when()
                 .get(VideoGameEndpoints.SINGLE_VIDEO_GAME)
+        .then();
+    }
+
+    @Test
+    public void testVideoGameSerializationByJSON() {
+        VideoGame videoGame = new VideoGame("Action", "Call of Duty - Modern Warfare",
+                "Mature", "2017-12-10", 97);
+        given()
+                .body(videoGame)
+        .when()
+                .post(VideoGameEndpoints.ALL_VIDEO_GAMES)
         .then();
     }
 }
