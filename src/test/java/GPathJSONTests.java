@@ -59,4 +59,32 @@ public class GPathJSONTests extends FootballConfig {
         int sum = response.path("squad.collect { it.id }.sum()");
         System.out.println("Sum of number: " + sum);
     }
+
+    @Test
+    public void extractMapOfPlayerWithParams() {
+        String position = "Offence";
+        String nationality = "England";
+        Response response = get("/teams/57");
+        Map<String, ?> map = response.path("squad.findAll { it.position = '%s' }.find { it.nationality = '%s' }", position, nationality);
+        System.out.println("Map of player: " + map);
+    }
+
+    @Test
+    public void extractMapOfPlayersWithParams() {
+        String position = "Offence";
+        String nationality = "England";
+        Response response = get("/teams/57");
+        List<Map<String, ?>> listMap = response.path("squad.findAll { it.position = '%s' }.findAll { it.nationality = '%s' }", position, nationality);
+        System.out.println("Map of players: " + listMap);
+        System.out.println("Size of Map of players: " + listMap.size());
+    }
+
+    @Test
+    public void extractListOfPlayersWithParams() {
+        String position = "Offence";
+        String nationality = "England";
+        Response response = get("/teams/57");
+        List<String> players = response.path("squad.findAll { it.position = '%s' }.findAll { it.nationality = '%s' }.name", position, nationality);
+        System.out.println("Size of List of players: " + players.size());
+    }
 }
