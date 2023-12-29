@@ -38,4 +38,25 @@ public class GPathJSONTests extends FootballConfig {
         System.out.println("List of players: " + listOFPlayers);
         System.out.println("Size of List of players: " + listOFPlayers.size());
     }
+
+    @Test
+    public void extractSingleValueWithHighestNumber() {
+        Response response = get("/teams/57");
+        String name = response.path("squad.max { it.id }.name");
+        System.out.println("Highest player name: " + name);
+    }
+
+    @Test
+    public void extractSingleValueWithLowestNumber() {
+        Response response = get("/teams/57");
+        String name = response.path("squad.min { it.id }.name");
+        System.out.println("Lowest player name: " + name);
+    }
+
+    @Test
+    public void extractSumOfNumbers() {
+        Response response = get("/teams/57");
+        int sum = response.path("squad.collect { it.id }.sum()");
+        System.out.println("Sum of number: " + sum);
+    }
 }
